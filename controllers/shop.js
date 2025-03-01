@@ -1,6 +1,6 @@
 const fs = require('fs');
 const path = require('path');
-const stripe = require('stripe')('sk_test_51OtvXRRpfNdOVmP1KDdZEcpteHm0tHvc3FjhQ05DSIq9pbCjDW3pp9kdblNVbR5CYoayq8kBAblQPwkwdLg9I2vA00A5F9aTmL');
+const stripe = require('stripe')(STRIPE_TEST_KEY);
 
 const Product = require('../models/product');
 const Order = require('../models/order');

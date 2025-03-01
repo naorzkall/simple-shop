@@ -12,8 +12,8 @@ const transporter = nodemailer.createTransport({
     auth: {
         // user: process.env.NODEJS_GMAIL_APP_USER,   // your email address
         // pass: process.env.NODEJS_GMAIL_APP_PASSWORD // your password
-        user:'naorzkallgpt@gmail.com',
-        pass:'imnx nzum vdfo hklb'
+        user:process.env.GMAIL_USER,
+        pass:process.env.GMAIL_PASSWORD
     }
 });
 
@@ -157,7 +157,7 @@ exports.postSignup = (req, res, next) => {
   .then(result => {
     res.redirect('/login');
     return transporter.sendMail({
-      from: 'naorzkallgpt@gmail.com', // sender address
+      from: process.env.GMAIL_USER, // sender address
       to: email, // list of receivers
       subject: 'Signup succeeded!', // Subject line
       html: "<h1>you successfully signed up.</h1>"
@@ -213,7 +213,7 @@ exports.postReset = (req, res, next) => {
         res.redirect('/');
         return transporter.sendMail({
           to: req.body.email,
-          from: 'naorzkallgpt@gmail.com', // sender address,
+          from: process.env.GMAIL_USER, // sender address,
           subject: 'Password reset',
           html: `
             <p>You requested a password reset</p>
@@ -276,7 +276,7 @@ exports.postNewPassword = (req, res, next) => {
       res.redirect('/login');
       return transporter.sendMail({
         to: email,
-        from: 'naorzkallgpt@gmail.com', // sender address,
+        from: process.env.GMAIL_USER, // sender address,
         subject: 'your Password have been reset',
         html: `
           <p>You changed password successfuly</p>

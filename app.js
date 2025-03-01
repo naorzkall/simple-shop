@@ -12,14 +12,11 @@ const multer = require('multer');
 const errorController = require('./controllers/error');
 const User = require('./models/user');
 
-const MONGODB_URI = 
-  'mongodb+srv://naorzshop:pDZltX186oyJ7FzT@cluster0.s4da6f3.mongodb.net/shop?retryWrites=true&w=majority&appName=Cluster0';
-const dbUrl = 'mongodb://localhost:27017/shop';
 
 const app = express();
 // excute the MongoDBStore as constructor
 const store = new MongoDBStore({
-  uri: dbUrl,
+  uri: process.env.DB_URL,
   collection: 'sessions'
 });
 
@@ -115,9 +112,7 @@ app.use(errorController.get404);
 // });
 
 mongoose
-  .connect(dbUrl
-    // 'mongodb+srv://naorzshop:pDZltX186oyJ7FzT@cluster0.s4da6f3.mongodb.net/shop?retryWrites=true&w=majority&appName=Cluster0'
-  )
+  .connect(process.env.DB_URL)
   .then(result => {
     console.log("connected");
     app.listen(3000);
