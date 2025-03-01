@@ -11,6 +11,7 @@ const multer = require('multer');
 
 const errorController = require('./controllers/error');
 const User = require('./models/user');
+const helmet = require('helmet');
 
 
 const app = express();
@@ -49,6 +50,9 @@ app.set('views', 'views');
 const authRoutes = require('./routes/auth');
 const adminRoutes = require('./routes/admin');
 const shopRoutes = require('./routes/shop');
+
+app.use(helmet());
+
 
 app.use(bodyParser.urlencoded({ extended: false }));
 
@@ -115,7 +119,7 @@ mongoose
   .connect(process.env.DB_URL)
   .then(result => {
     console.log("connected");
-    app.listen(3000);
+    app.listen(process.env.PORT || 3000);
   })
   .catch(err => {
     console.log(err);
